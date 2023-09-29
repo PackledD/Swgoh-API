@@ -22,3 +22,7 @@ class PlayerRemoteLoader(BaseRemoteLoader):
 class PlayerLocalLoader(BaseLocalLoader):
     def __init__(self):
         super().__init__()
+        self._obj_cls = Player
+
+    def _get_path(self, path, name):
+        return f"{path}/{name}.json"

@@ -22,3 +22,13 @@ class GuildRemoteLoader(BaseRemoteLoader):
 class GuildLocalLoader(BaseLocalLoader):
     def __init__(self):
         super().__init__()
+        self._obj_cls = Guild
+
+    def _get_path(self, path, name):
+        return f"{path}/{name}/data.json"
+
+    def load(self, *args):
+        data = self._read_data(*args)
+        if data:
+            return Guild(data, load_path=args[0])
+        return None

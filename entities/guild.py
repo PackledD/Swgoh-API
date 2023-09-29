@@ -4,18 +4,17 @@ from entities.player import Player
 
 
 class Guild(object):
-    def __init__(self, data, use_cache=True):
+    def __init__(self, data, use_cache=True, load_path="."):
         self.id = data["guild_id"]
         self.name = data["name"]
-        self.players = self.__create_players(data["members"], use_cache)
+        self.players = self.__create_players(data["members"], use_cache, f"{load_path}/{self.name}/players")
         self.__data = data
 
     @staticmethod
-    def __create_players(data, use_cache):
+    def __create_players(data, use_cache, path):
         from swgoh_api import SwgohAPI
-        # !!!
         if use_cache:
-            return [SwgohAPI().load_player_from_cache(mem["name"]) for mem in data]
+            return [SwgohAPI().load_player_from_cache(mem["player_name"], path) for mem in data]
         return [SwgohAPI().load_player_from_url(mem["ally_code"]) for mem in data]
 
     def get_units(self, unit_name):

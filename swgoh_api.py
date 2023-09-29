@@ -16,14 +16,14 @@ class SwgohAPI(object):
         self.__unit_loader = UnitRemoteLoader()
         self.__image_loader = ImageRemoteLoader()
 
-    def load_guild_from_cache(self, guild_name):
-        return self.__local_guild_loader.load(guild_name)
+    def load_guild_from_cache(self, guild_name, path="."):
+        return self.__local_guild_loader.load(path, guild_name)
 
     def load_guild_from_url(self, guild_id):
         return self.__remote_guild_loader.load(guild_id)
 
-    def load_player_from_cache(self, player_name):
-        return self.__local_player_loader.load(player_name)
+    def load_player_from_cache(self, player_name, path="."):
+        return self.__local_player_loader.load(path, player_name)
 
     def load_player_from_url(self, ally_code):
         return self.__remote_player_loader.load(ally_code)
