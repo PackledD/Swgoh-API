@@ -1,15 +1,11 @@
 import requests as rq
 from requests.exceptions import HTTPError
 from url_requests.url_request import *
+from utils.singleton import singleton
 
 
+@singleton
 class Requester(object):
-    # Singleton
-    def __new__(cls):
-        if not hasattr(cls, "instance"):
-            cls.instance = super(Requester, cls).__new__(cls)
-        return cls.instance
-
     def make_request(self, req, **kwargs):
         try:
             resp = rq.get(req.url, kwargs)

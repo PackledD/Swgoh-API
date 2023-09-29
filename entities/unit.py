@@ -1,6 +1,3 @@
-from entities.requirement import Requirement
-
-
 class Unit(object):
     UNIT = 0
     SHEEP = 1

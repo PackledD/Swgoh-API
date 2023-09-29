@@ -1,20 +1,22 @@
 import os
 import ujson as json
 from entities.player import Player
-from url_requests.requester import Requester
-from url_requests.url_request import PlayerURLRequest
+from swgoh_api import SwgohAPI
 
 
 class Guild(object):
-    def __init__(self, data):
+    def __init__(self, data, use_cache=True):
         self.id = data["guild_id"]
         self.name = data["name"]
-        self.players = self.__create_players(data["members"])
+        self.players = self.__create_players(data["members"], use_cache)
         self.__data = data
 
     @staticmethod
-    def __create_players(data):
-        return [Player(Requester().make_request(PlayerURLRequest(mem["ally_code"]))) for mem in data]
+    def __create_players(data, use_cache):
+        # !!!
+        if use_cache:
+            return [SwgohAPI().load_player_from_cache(mem["name"]) for mem in data]
+        return [SwgohAPI().load_player_from_url(mem["ally_code"]) for mem in data]
 
     def get_units(self, unit_name):
         lst = {}
@@ -53,7 +55,7 @@ class Guild(object):
             player.save(f"{path}/players/")
 
     def add_player(self, code):
-        player = Player(Requester().make_request(PlayerURLRequest(code)))
+        player = Player(SwgohAPI.load_player_from_url(code))
         if player:
             self.players.append(player)
         return player is not None
