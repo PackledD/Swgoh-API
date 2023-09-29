@@ -1,7 +1,6 @@
 import os
 import ujson as json
 from entities.player import Player
-from swgoh_api import SwgohAPI
 
 
 class Guild(object):
@@ -13,6 +12,7 @@ class Guild(object):
 
     @staticmethod
     def __create_players(data, use_cache):
+        from swgoh_api import SwgohAPI
         # !!!
         if use_cache:
             return [SwgohAPI().load_player_from_cache(mem["name"]) for mem in data]
@@ -55,6 +55,7 @@ class Guild(object):
             player.save(f"{path}/players/")
 
     def add_player(self, code):
+        from swgoh_api import SwgohAPI
         player = Player(SwgohAPI.load_player_from_url(code))
         if player:
             self.players.append(player)
