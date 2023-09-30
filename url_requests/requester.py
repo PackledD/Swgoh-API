@@ -1,7 +1,7 @@
 import requests as rq
 from requests.exceptions import HTTPError
-from url_requests.url_request import *
-from utils.singleton import singleton
+from .url_request import *
+from ..utils.singleton import singleton
 
 
 @singleton

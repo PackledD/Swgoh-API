@@ -1,5 +1,5 @@
-from loaders.base_loader import BaseLoader
-from url_requests.requester import Requester
+from .base_loader import BaseLoader
+from ..url_requests.requester import Requester
 
 
 class BaseRemoteLoader(BaseLoader):

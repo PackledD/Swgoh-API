@@ -1,6 +1,6 @@
 import os
 import ujson as json
-from entities.player import Player
+from .player import Player
 
 
 class Guild(object):
