@@ -3,6 +3,7 @@ import ujson as json
 from .player import Player
 
 
+
 class Guild(object):
     def __init__(self, data, use_cache=True, load_path="."):
         self.id = data["guild_id"]

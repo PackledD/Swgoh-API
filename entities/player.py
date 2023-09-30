@@ -3,6 +3,7 @@ import ujson as json
 from .unit import Unit
 
 
+
 class Player(object):
     def __init__(self, data):
         self.id = data["data"]["ally_code"]

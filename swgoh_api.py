@@ -41,6 +41,21 @@ class SwgohAPI(object):
 
     def save_unit_image(self, unit_name, path=".", filename=None):
         '''Download icon of unit from swgoh.gg and save it in local storage'''
+        return self.__local_guild_loader.load(path, guild_name)
+
+    def load_guild_from_url(self, guild_id):
+        return self.__remote_guild_loader.load(guild_id)
+
+    def load_player_from_cache(self, player_name, path="."):
+        return self.__local_player_loader.load(path, player_name)
+
+    def load_player_from_url(self, ally_code):
+        return self.__remote_player_loader.load(ally_code)
+
+    def load_unit_from_url(self, ally_code, unit_name):
+        return self.__unit_loader.load(ally_code, unit_name)
+
+    def save_unit_image(self, unit_name, path=".", filename=None):
         data = self.__image_loader.load(unit_name)
         if data:
             if not filename:
