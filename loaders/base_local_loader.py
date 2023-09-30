@@ -1,5 +1,5 @@
 import ujson as json
-from loaders.base_loader import BaseLoader
+from .base_loader import BaseLoader
 
 
 class BaseLocalLoader(BaseLoader):

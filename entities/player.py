@@ -1,6 +1,7 @@
 import os
 import ujson as json
-from entities.unit import Unit
+from .unit import Unit
+
 
 
 class Player(object):

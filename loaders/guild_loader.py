@@ -1,8 +1,8 @@
-from loaders.base_local_loader import BaseLocalLoader
-from loaders.base_remote_loader import BaseRemoteLoader
-from utils.singleton import singleton
-from url_requests.url_request import GuildURLRequest
-from entities.guild import Guild
+from .base_local_loader import BaseLocalLoader
+from .base_remote_loader import BaseRemoteLoader
+from ..utils.singleton import singleton
+from ..url_requests.url_request import GuildURLRequest
+from ..entities.guild import Guild
 
 
 @singleton
