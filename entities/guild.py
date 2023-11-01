@@ -52,7 +52,8 @@ class Guild(object):
         with open(f"{path}/data.json", "w") as f:
             json.dump(self.__data, f, indent=2)
         for player in self.players:
-            player.save(f"{path}/players/")
+            if player:
+                player.save(f"{path}/players/")
 
     def add_player(self, code):
         from swgoh_api import SwgohAPI

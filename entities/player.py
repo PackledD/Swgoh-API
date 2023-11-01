@@ -15,9 +15,9 @@ class Player(object):
     def __create_units(data):
         return [Unit(u["data"]) for u in data]
 
-    def get_unit(self, unit_name):
+    def get_unit(self, unit_id):
         for u in self.units:
-            if unit_name == u.name:
+            if unit_id == u.id:
                 return u
         return None
 

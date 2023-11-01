@@ -6,7 +6,8 @@ class URLRequest(object):
         return data.content
 
     def error(self):
-        raise Exception("Can't make request")
+        # raise Exception("Can't make request")
+        pass
 
 
 class GuildURLRequest(URLRequest):
