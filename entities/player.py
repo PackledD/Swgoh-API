@@ -15,15 +15,15 @@ class Player(object):
     def __create_units(data):
         return [Unit(u["data"]) for u in data]
 
-    def get_unit(self, unit_name):
+    def get_unit(self, unit_id):
         for u in self.units:
-            if unit_name == u.name:
+            if unit_id == u.id:
                 return u
         return None
 
-    def get_unit_with_cond(self, unit_name, require):
+    def get_unit_with_cond(self, unit_id, require):
         for u in self.units:
-            if unit_name == u.name:
+            if unit_id == u.id:
                 return u if u.check_requirement(require) else None
         return None
 
