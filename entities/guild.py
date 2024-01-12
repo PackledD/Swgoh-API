@@ -3,7 +3,6 @@ import ujson as json
 from .player import Player
 
 
-
 class Guild(object):
     def __init__(self, data, use_cache=True, load_path="."):
         self.id = data["guild_id"]
@@ -46,13 +45,15 @@ class Guild(object):
                 return player
         return None
 
-    def save(self, path="."):
+    def save(self, path=".", players_path=None):
         path += f"/{self.name}"
-        os.makedirs(f"{path}/players", exist_ok=True)
+        if not players_path:
+            players_path = f"{path}/players"
+        os.makedirs(players_path, exist_ok=True)
         with open(f"{path}/data.json", "w") as f:
             json.dump(self.__data, f, indent=2)
         for player in self.players:
-            player.save(f"{path}/players/")
+            player.save(players_path)
 
     def add_player(self, code):
         from swgoh_api import SwgohAPI
