@@ -4,17 +4,17 @@ from .player import Player
 
 
 class Guild(object):
-    def __init__(self, data, use_cache=True, load_path="."):
+    def __init__(self, data, use_cache=True, load_players_path="."):
         self.id = data["guild_id"]
         self.name = data["name"]
-        self.players = self.__create_players(data["members"], use_cache, f"{load_path}/{self.name}/players")
+        self.players = self.__create_players(data["members"], use_cache, load_players_path)
         self.__data = data
 
     @staticmethod
     def __create_players(data, use_cache, path):
         from swgoh_api import SwgohAPI
         if use_cache:
-            return [SwgohAPI().load_player_from_cache(mem["player_name"], path) for mem in data]
+            return [SwgohAPI().load_player_from_cache(mem["ally_code"], path) for mem in data]
         return [SwgohAPI().load_player_from_url(mem["ally_code"]) for mem in data]
 
     def get_units(self, unit_name):
@@ -49,6 +49,7 @@ class Guild(object):
         path += f"/{self.name}"
         if not players_path:
             players_path = f"{path}/players"
+        os.makedirs(path, exist_ok=True)
         os.makedirs(players_path, exist_ok=True)
         with open(f"{path}/data.json", "w") as f:
             json.dump(self.__data, f, indent=2)

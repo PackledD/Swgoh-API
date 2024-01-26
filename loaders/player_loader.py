@@ -24,5 +24,5 @@ class PlayerLocalLoader(BaseLocalLoader):
         super().__init__()
         self._obj_cls = Player
 
-    def _get_path(self, path, name):
-        return f"{path}/{name}.json"
+    def _get_path(self, path, ally_code):
+        return f"{path}/{ally_code}.json"
