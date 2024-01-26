@@ -19,17 +19,17 @@ class SwgohAPI(object):
         self.__unit_loader = UnitRemoteLoader()
         self.__image_loader = ImageRemoteLoader()
 
-    def load_guild_from_cache(self, guild_name, path="."):
+    def load_guild_from_cache(self, guild_name, path=".", players_path="."):
         '''Load data from local storage and create Guild object'''
-        return self.__local_guild_loader.load(path, guild_name)
+        return self.__local_guild_loader.load(path, guild_name, players_path)
 
     def load_guild_from_url(self, guild_id):
         '''Get data from swgoh.gg and create Guild object'''
         return self.__remote_guild_loader.load(guild_id)
 
-    def load_player_from_cache(self, player_name, path="."):
+    def load_player_from_cache(self, ally_code, path="."):
         '''Load data from local storage and create Player object'''
-        return self.__local_player_loader.load(path, player_name)
+        return self.__local_player_loader.load(path, ally_code)
 
     def load_player_from_url(self, ally_code):
         '''Get data from swgoh.gg and create Player object'''
@@ -39,11 +39,11 @@ class SwgohAPI(object):
         '''Get data from swgoh.gg and create Unit object (of giving player)'''
         return self.__unit_loader.load(ally_code, unit_name)
 
-    def save_unit_image(self, unit_name, path=".", filename=None):
+    def save_unit_image(self, unit_id, path=".", filename=None):
         '''Download icon of unit from swgoh.gg and save it in local storage'''
-        data = self.__image_loader.load(unit_name)
+        data = self.__image_loader.load(unit_id)
         if data:
             if not filename:
-                filename = f"{unit_name}.png"
+                filename = f"{unit_id}.png"
             save_image(data, path, filename)
         return data is not None

@@ -28,7 +28,7 @@ class GuildLocalLoader(BaseLocalLoader):
         return f"{path}/{name}/data.json"
 
     def load(self, *args):
-        data = self._read_data(*args)
+        data = self._read_data(args[0], args[1])
         if data:
-            return Guild(data, load_path=args[0])
+            return Guild(data, load_players_path=args[2])
         return None

@@ -3,7 +3,6 @@ import ujson as json
 from .unit import Unit
 
 
-
 class Player(object):
     def __init__(self, data):
         self.id = data["data"]["ally_code"]
@@ -29,5 +28,5 @@ class Player(object):
 
     def save(self, path="."):
         os.makedirs(path, exist_ok=True)
-        with open(f"{path}/{self.name}.json", "w") as f:
+        with open(f"{path}/{self.id}.json", "w") as f:
             json.dump(self.__data, f, indent=2)
