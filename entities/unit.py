@@ -11,6 +11,10 @@ class Unit(object):
         if self.kind == Unit.UNIT:
             self.gear_level = data["gear_level"]
             self.relic = data["relic_tier"] - 2
+            self.zeta_data = data["zeta_abilities"]
+            self.zetas = len(self.zeta_data)
+            self.omicron_data = data["omicron_abilities"]
+            self.omicrons = len(self.omicron_data)
 
     def check_requirement(self, req):
         for key in req.require:
